@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.sorrentino.dscatalog.services.exceptions.DataBaseException;
-import com.sorrentino.dscatalog.services.exceptions.ResourceEntityNotFoundException;
+import com.sorrentino.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-	@ExceptionHandler(ResourceEntityNotFoundException.class)
-	public ResponseEntity<StandardError> entityNotFound(ResourceEntityNotFoundException e, HttpServletRequest request){
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());

@@ -19,7 +19,7 @@ import com.sorrentino.dscatalog.entities.Product;
 import com.sorrentino.dscatalog.repositories.CategoryRepository;
 import com.sorrentino.dscatalog.repositories.ProductRepository;
 import com.sorrentino.dscatalog.services.exceptions.DataBaseException;
-import com.sorrentino.dscatalog.services.exceptions.ResourceEntityNotFoundException;
+import com.sorrentino.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {
@@ -47,7 +47,7 @@ public class ProductService {
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
 		Optional<Product> obj = repository.findById(id);
-		Product entity = obj.orElseThrow(() -> new ResourceEntityNotFoundException("Entity not found"));
+		Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new ProductDTO(entity, entity.getCategories());
 	}
 
@@ -68,7 +68,7 @@ public class ProductService {
 		return new ProductDTO(entity);
 		}
 		catch(EntityNotFoundException e){
-			throw new ResourceEntityNotFoundException("Id not found " + id);			
+			throw new ResourceNotFoundException("Id not found " + id);			
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class ProductService {
 		 	repository.deleteById(id);
 		}
 		catch(EmptyResultDataAccessException e) {
-			throw new ResourceEntityNotFoundException("Id not found " + id);
+			throw new ResourceNotFoundException("Id not found " + id);
 		}
 		
 		catch(DataIntegrityViolationException e) {
