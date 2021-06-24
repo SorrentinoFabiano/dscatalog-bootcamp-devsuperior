@@ -33,16 +33,15 @@ import com.sorrentino.dscatalog.tests.Factory;
 
 @WebMvcTest(ProductResource.class)
 public class ProductResourceTests {
-
+	
 	@Autowired
 	private MockMvc mockMvc;
-
-	@MockBean
-	private ProductService service;
 	
 	@Autowired
 	private ObjectMapper objectMapper;
-	
+
+	@MockBean
+	private ProductService service;
 	
 	private Long existingId;
 	private Long nonExistingId;
@@ -146,7 +145,7 @@ String jsonBody = objectMapper.writeValueAsString(productDTO);
 						.contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON));
 		
-		result.andExpect(status().isNotFound());
+		result.andExpect(status().isNotFound());		
 	}
 	
 

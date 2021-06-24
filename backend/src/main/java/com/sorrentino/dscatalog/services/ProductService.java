@@ -35,7 +35,7 @@ public class ProductService {
 		Page<Product> list = repository.findAll(pageable);		
 		return list.map(x -> new ProductDTO(x));
 		
-		//Ou.
+		
 		/*List<ProductDTO> listDTO = new ArrayList<>();
 		for (Product cat : list) {
 			listDTO.add(new ProductDTO(cat));
